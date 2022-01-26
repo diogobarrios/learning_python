@@ -18,7 +18,7 @@ if door == "1":
     elif bear == "2":
         print("The bear eats your legs off. Good Job!")
     else:
-        print("Well, doing {} is probably better").format(bear)
+        print("Well, doing {} is probably better".format('bear'))
         print("Bear runs away.")
 
 elif door == "2":
