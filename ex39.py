@@ -1,58 +1,65 @@
 # Exercise 39: Dictionaries, Oh Lovely Dictionaries
 
-# List
-things = ['a', 'b', 'c', 'd']
-# Will print index 1 = b
-print(things[1])
+# create a mapping of state to abbreviation
 
-# changing the index 1 = z
-things[1] = 'z'
+states = {
+    'Oregon': 'OR',
+    'Florida': 'FL',
+    'California': 'CA',
+    'New York': 'NY',
+    'Michigan': 'MI'
+}
 
-# Will print index 1 = z
-print(things[1])
+# create a basic set of states and some cities in them
+cities = {
+    'CA': 'San Francisco',
+    'MI': 'Detroit',
+    'FL': 'Jacksonville'
+}
 
-# The new List with 'z'
-print(things)
+# add some more cities
+cities['NY'] = 'New York'
+cities['OR'] = 'Portland'
 
-# Dictionary can be called the index's
-# with anything
+# print out some cities
+print('-' * 10)
+print("NY State has: ", cities['NY'])
+print("OR State has: ", cities['OR'])
 
-stuff = {'name': 'Zed', 'age': 39, 'height': 6 * 12 + 2}
-print(stuff['name'])
-# will print a string 'Zed'
+# print some states
+print('-' * 10)
+print("Michigan's abbreviation is: ", states['Michigan'])
+print("Florida's abbreviation is: ", states['Florida'])
 
-print(stuff['age'])
-# will print a int 39
+# do it by using the state then cities Dictionaries
+print('-' * 10)
+print("Michigan has: ", cities[states['Michigan']])
+print("Florida has: ", cities[states['Florida']])
 
-print(stuff['height'])
-# will print a int 74
+# print every state abbreviation
+print('-' * 10)
+for state, abbrev in list(states.items()):
+    print(f"{state} is abbreviated {abbrev}")
 
-# Adding a new var 'city' as 'SF'
-stuff['city'] = 'SF'
+# print every city in state
+print('-' * 10)
+for abbrev, city in list(cities.items()):
+    print(f"{abbrev} has the city {city}")
 
-print(stuff['city'])
-# will print a string 'SF'
+# now do both at the same time
+print('-' * 10)
+for state, abbrev in list(states.items()):
+    print(f"{state} state is abbreviated {abbrev}")
+    print(f"and has city {cities[abbrev]}")
 
-print("Adding to dict 'stuff' a key '1' to a value 'Wow'")
-stuff[1] = 'Wow'
-print(stuff[1])
+print('-' * 10)
+# safely get a abbreviation by state that might not be there
+state = states.get('Texas')
 
-print("Adding to a dict 'stuff' a key '2' to a value 'Neato'")
-stuff[2] = 'Neato'
-print(stuff[2])
+if not state:
+    print("Sorry, no Texas.")
 
-print("Dict 'stuff'")
-print(stuff)
-
-print("Now we delete the new entries because doesn't make sense.")
-print("Using 'del'")
-del stuff['city']
-del stuff[1]
-del stuff[2]
-
-print("The Dict as was!")
-print(stuff)
-
-# ------------------------ #
-
-# continue and clean above to do the new one
+# get a city with a default value
+city = cities.get('TX', 'Does Note Exist')
+print(cities)
+print(f"The city for the state 'TX' is: {city}")
