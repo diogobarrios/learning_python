@@ -14,14 +14,12 @@ print('type a number:')
 try:
     number = int(input())  # the first input()
     while True:
-        # Get the result from collatz() with the first input()
-        result = collatz(number)
-        # assigned the new value to the number variable
-        number = result
+        # Get the new number from collatz() and assigned to number variable
+        number = collatz(number)
         # print the new value
         print(number)
         # if result is not equal to 1 (True), repeat the process
-        if result != 1:
+        if number != 1:
             continue
         # if result is equal to 1 (False), print the text in the string and break
         # the while loop
