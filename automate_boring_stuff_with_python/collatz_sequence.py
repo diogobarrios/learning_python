@@ -8,8 +8,19 @@ def collatz(number):
         return 3 * number + 1
 
 
-while collatz < 1:
-    print('type a number:')
-    number = int(input())
+print('type a number:')
+number = int(input())  # the first input()
+while True:
+    # Get the result from collatz() with the first input()
     result = collatz(number)
-    print(result)
+    # assigned the new value to the number variable
+    number = result
+    # print the new value
+    print(number)
+    # if result is not equal to 1 (True), repeat the process
+    if result != 1:
+        continue
+    # if result is equal to 1 (False), print the text in the string and break
+    # the while loop
+    print('You did it!')
+    break
