@@ -12,4 +12,4 @@ messages = [
         'Very doubtful'
 ]
 
-print(messages[random.randint(0,len(messages) - 1)])
+print(messages[random.randivr nt(0,len(messages) - 1)])
