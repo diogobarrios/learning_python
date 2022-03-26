@@ -10,4 +10,4 @@ while True:
     password = input()
     if password.isalnum() and len(password) >= 8:
         break
-    print('Password must have letters, numbers and 8 characters.')
+    print('Password must have letters, numbers and at least 8 characters.')
