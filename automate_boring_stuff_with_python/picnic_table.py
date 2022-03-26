@@ -1,3 +1,7 @@
+#! python3
+
+# Exercise using ljust(), rjust(), center()
+
 def print_picnic(items_dict, left_width, right_width):
     print('Picnic Items'.center(left_width + right_width, '-'))
     for k, v in items_dict.items():
