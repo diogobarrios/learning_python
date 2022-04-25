@@ -46,3 +46,17 @@ for amer_filename in os.listdir('.'):
     day_part = mo.group(4)
     year_part = mo.group(6)
     after_part = mo.gorup(8)
+
+# Step 3: Form the New Filename and Rename The Files
+# Form the Europen-style filename.
+euro_filename = before_part + day_part + '-' + month_part + '-' + year_part
++ after_part
+
+# Get the full, absolute file paths-
+abs_working_dir = os.path.abspath('.')
+amer_filename = os.path.join(abs_working_dir, amer_filename)
+eurofilename = os.path.join(abs_working_dir, euro_filename)
+
+# Rename the files.
+print('Renaming "%s" to "%s"...' % (amer_filename, euro_filename))
+# shutil.move(amer_filename, euro_filename) # uncomment after testing
