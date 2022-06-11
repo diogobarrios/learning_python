@@ -11,10 +11,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import glob
 import os
 from dotenv import load_dotenv
 import smtplib as smtp
 from email.mime.text import MIMEText
+import sqlite3
 
 # TODO: Marcar diariamente o teste:
 
@@ -41,20 +43,20 @@ time.sleep(60)
 # Criação de un dicionário para captar os dados:
 dict_test = {}
 dict_test = {'id': (browser.find_element(
-                By.ID, 'testid')).get_attribute('innerHTML'),
-             'Data': (browser.find_element(
-                 By.ID, 'data')).get_attribute('innerHTML'),
-             'Browser': (browser.find_element(
-                 By.ID, 'browser')).get_attribute('innerHTML'),
-             'Download': (browser.find_element(
+    By.ID, 'testid')).get_attribute('innerHTML'),
+    'Data': (browser.find_element(
+        By.ID, 'data')).get_attribute('innerHTML'),
+    'Browser': (browser.find_element(
+        By.ID, 'browser')).get_attribute('innerHTML'),
+    'Download': (browser.find_element(
                  By.ID, 'dl')).get_attribute('innerHTML'),
-             'Upload': (browser.find_element(
-                 By.ID, 'ul')).get_attribute('innerHTML'),
-             'Ping': (browser.find_element(
-                 By.ID, 'ping')).get_attribute('innerHTML'),
-             'Jitter': (browser.find_element(
-                 By.ID, 'jitter')).get_attribute('innerHTML')
-             }
+    'Upload': (browser.find_element(
+        By.ID, 'ul')).get_attribute('innerHTML'),
+    'Ping': (browser.find_element(
+        By.ID, 'ping')).get_attribute('innerHTML'),
+    'Jitter': (browser.find_element(
+        By.ID, 'jitter')).get_attribute('innerHTML')
+}
 
 
 with open(str(dict_test['id']) + '.txt', 'w') as f:
@@ -89,6 +91,32 @@ send_mail = server.sendmail(email_addr, email_sendr, message.as_string())
 print("Closing connection with the server...")
 time.sleep(2)
 server.quit()
-# TODO: Criar uma tabela onde o dicionário vai adicionando os dados
+
+# Remove .txt file created to send mail
+remove_tmp_files = glob.glob('*.txt')
+for tmp in remove_tmp_files:
+    os.remove(tmp)
+
+# Guardar os dados do dicionário numa base de dados sqlite
+# connection sqlite3 database
+conn = sqlite3.connect('speed_test.db')
+# create cursor object
+c = conn.cursor()
+# create a table internet_speed:
+# c.execute('''CREATE TABLE internet_speed (id integer primary key,
+# data text, browser text, download real, upload real, ping real,
+# jitter real)''')
+# Insert new row for each test
+c.execute("INSERT INTO internet_speed VALUES(?,?,?,?,?,?,?)",
+          [dict_test["id"], dict_test["Data"], dict_test["Browser"],
+           dict_test["Download"], dict_test["Upload"], dict_test["Ping"],
+           dict_test["Jitter"]])
+# Save the changes
+conn.commit()
+# to see the changes
+c.execute("SELECT * FROM internet_speed")
+print(c.fetchall())
+# Close the connection
+conn.close()
 # TODO: Ligar ao Grafana para criar um dashboard com
 # limite sup, inf, e média. (Quality Control)
