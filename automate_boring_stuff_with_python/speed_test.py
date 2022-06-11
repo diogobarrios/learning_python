@@ -38,7 +38,7 @@ time.sleep(5)
 button = browser.find_element(By.ID, 'startButton')
 button.click()
 # Tirar os dados de download/upload do teste:
-print("Doing test speed...")
+print("Doing speed test...")
 time.sleep(60)
 # Criação de un dicionário para captar os dados:
 dict_test = {}
