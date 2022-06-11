@@ -1,7 +1,0 @@
-id: 1101708268
-Data: 2022-06-08 00:16
-Browser: Chrome 102.0.5005.61
-Download: 17.34
-Upload: 13.11
-Ping: 62.78
-Jitter: 36.17
