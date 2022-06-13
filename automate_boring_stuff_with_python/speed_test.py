@@ -11,7 +11,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
-import glob
+import glob  # usar para encontrar ficheiros num dir.
 import os
 from dotenv import load_dotenv
 import smtplib as smtp
@@ -66,31 +66,33 @@ with open(str(dict_test['id']) + '.txt', 'w') as f:
 print("Closing the browser...")
 browser.close()
 
-# Enviar um mail com a informação
-# ficheiro com a informação do teste
-txt_log = open(str(dict_test['id']) + '.txt')
-data = txt_log.read()
-
-# dados para o email
-load_dotenv()
-email_addr = os.getenv('email_address')
-email_passwd = os.getenv('email_password')
-email_sendr = 'diogobarrios22@gmail.com'
-email_subject = 'Teste de Velocidade a ' + str(dict_test['Data'])
-message = MIMEText(data)
-message['From'] = email_addr
-message['To'] = email_sendr
-message['Subject'] = email_subject
-print("Connecting with the server using SSL...")
-time.sleep(2)
-# Conectar ao servidor
-server = smtp.SMTP_SSL('smtp.gmail.com', 465)
-con = server.login(email_addr, email_passwd)
-print("Sending mail...")
-send_mail = server.sendmail(email_addr, email_sendr, message.as_string())
-print("Closing connection with the server...")
-time.sleep(2)
-server.quit()
+# Enviar um mail com a informação se for abaixo do minimo 400Mbps / 80Mbps
+if dict_test['Download'] < 400 | dict_test['Upload'] < 80:
+    # ficheiro com a informação do teste
+    txt_log = open(str(dict_test['id']) + '.txt')
+    data = txt_log.read()
+    # dados para o email
+    load_dotenv()
+    email_addr = os.getenv('email_address')
+    email_passwd = os.getenv('email_password')
+    email_sendr = 'diogobarrios22@gmail.com'
+    email_subject = 'Teste de Velocidade a ' + str(dict_test['Data'])
+    message = MIMEText(data)
+    message['From'] = email_addr
+    message['To'] = email_sendr
+    message['Subject'] = email_subject
+    print("Connecting with the server using SSL...")
+    time.sleep(2)
+    # Conectar ao servidor
+    server = smtp.SMTP_SSL('smtp.gmail.com', 465)
+    con = server.login(email_addr, email_passwd)
+    print("Sending mail...")
+    send_mail = server.sendmail(email_addr, email_sendr, message.as_string())
+    print("Closing connection with the server...")
+    time.sleep(2)
+    server.quit()
+else:
+    None
 
 # Remove .txt file created to send mail
 remove_tmp_files = glob.glob('*.txt')
