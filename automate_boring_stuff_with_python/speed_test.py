@@ -20,11 +20,10 @@ import sqlite3
 
 # TODO: Marcar diariamente o teste:
 
-# Aceder ao site a fazer o teste:
+# Aceder ao site da NOS para fazer o teste:
 # url do teste:
 url = 'https://xperience.nos.pt/solution/OTT_gigaJS/'
 browser = webdriver.Chrome()
-# browser.maximize_window()
 browser.get(url)
 time.sleep(20)
 
