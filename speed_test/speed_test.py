@@ -66,7 +66,7 @@ print("Closing the browser...")
 browser.close()
 
 # Enviar um mail com a informação se for abaixo do minimo 400Mbps / 80Mbps
-if dict_test['Download'] < 400 | dict_test['Upload'] < 80:
+if int(dict_test['Download']) < 400 | int(dict_test['Upload']) < 80:
     # ficheiro com a informação do teste
     txt_log = open(str(dict_test['id']) + '.txt')
     data = txt_log.read()
