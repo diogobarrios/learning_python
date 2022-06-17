@@ -64,7 +64,7 @@ print("Closing the browser...")
 browser.close()
 
 # Enviar um mail com a informação se for abaixo do minimo 400Mbps / 80Mbps
-if float(dict_test['Download']) < 400.00 or float(dict_test['Upload']() < 80.00:
+if float(dict_test['Download']) < 400.00 or float(dict_test['Upload']) < 80.00:
     # ficheiro com a informação do teste
     txt_log = open(str(dict_test['id']) + '.txt')
     data = txt_log.read()
@@ -107,14 +107,14 @@ c = conn.cursor()
 # jitter real)''')
 # Insert new row for each test
 c.execute("INSERT INTO internet_speed VALUES(?,?,?,?,?,?,?)",
-           [dict_test["id"], dict_test["Data"], dict_test["Browser"],
-            dict_test["Download"], dict_test["Upload"], dict_test["Ping"],
-             dict_test["Jitter"]])
+[dict_test["id"], dict_test["Data"], dict_test["Browser"],
+dict_test["Download"], dict_test["Upload"], dict_test["Ping"],
+dict_test["Jitter"]])
 # Save the changes
 conn.commit()
 # to see the changes
-c.execute("SELECT * FROM internet_speed")
-print(c.fetchall())
+# c.execute("SELECT * FROM internet_speed")
+# c.fetchall()
 # Close the connection
 conn.close()
 
