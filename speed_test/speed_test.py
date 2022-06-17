@@ -25,7 +25,7 @@ import sqlite3
 url = 'https://xperience.nos.pt/solution/OTT_gigaJS/'
 browser = webdriver.Chrome()
 browser.get(url)
-time.sleep(20)
+time.sleep(30)
 
 # Aceitar os termos e condições
 button = browser.find_element(By.ID, 'startButton')
@@ -38,7 +38,7 @@ button = browser.find_element(By.ID, 'startButton')
 button.click()
 # Tirar os dados de download/upload do teste:
 print("Doing speed test...")
-time.sleep(60)
+time.sleep(80)
 # Criação de un dicionário para captar os dados:
 dict_test = {}
 dict_test = {'id': (browser.find_element(
@@ -56,8 +56,7 @@ dict_test = {'id': (browser.find_element(
     'Jitter': (browser.find_element(
         By.ID, 'jitter')).get_attribute('innerHTML')
 }
-
-
+time.sleep(30)
 with open(str(dict_test['id']) + '.txt', 'w') as f:
     for key, value in dict_test.items():
         f.write("%s: %s\n" % (key, value))
@@ -66,7 +65,7 @@ print("Closing the browser...")
 browser.close()
 
 # Enviar um mail com a informação se for abaixo do minimo 400Mbps / 80Mbps
-if int(dict_test['Download']) < 400 | int(dict_test['Upload']) < 80:
+if float(dict_test['Download']) < 400.00 or float(dict_test['Upload']) < 80.00:
     # ficheiro com a informação do teste
     txt_log = open(str(dict_test['id']) + '.txt')
     data = txt_log.read()
@@ -121,3 +120,8 @@ print(c.fetchall())
 conn.close()
 # TODO: Ligar ao Grafana para criar um dashboard com
 # limite sup, inf, e média. (Quality Control)
+
+# TODO: ver o que se passou com a condição if
+# TODO: continuar com o grafana (já tá instalado)
+# Continuar neste link
+# https://grafana.com/docs/grafana/latest/setup-grafana/installation/mac/
