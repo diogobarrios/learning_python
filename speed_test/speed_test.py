@@ -1,7 +1,7 @@
 #! python3
 
 # speed_test.py - fazer um teste de velocidade no site {url}
-# diariamente e receber um mail.
+# diariamente e receber um mail caso esteja abaixo dos valores.
 
 # Confirmar o contratualizado:
 # Minimo 400Mbps / 80Mbps
@@ -17,8 +17,6 @@ from dotenv import load_dotenv
 import smtplib as smtp
 from email.mime.text import MIMEText
 import sqlite3
-
-# TODO: Marcar diariamente o teste:
 
 # Aceder ao site da NOS para fazer o teste:
 # url do teste:
@@ -66,7 +64,7 @@ print("Closing the browser...")
 browser.close()
 
 # Enviar um mail com a informação se for abaixo do minimo 400Mbps / 80Mbps
-if dict_test['Download'] < str(400) or dict_test['Upload'] < str(80):
+if float(dict_test['Download']) < 400.00 or float(dict_test['Upload']() < 80.00:
     # ficheiro com a informação do teste
     txt_log = open(str(dict_test['id']) + '.txt')
     data = txt_log.read()
@@ -108,15 +106,22 @@ c = conn.cursor()
 # data text, browser text, download real, upload real, ping real,
 # jitter real)''')
 # Insert new row for each test
-c.execute("INSERT INTO internet_speed VALUES(?,?,?,?,?,?,?)", [dict_test["id"],
-    dict_test["Data"], dict_test["Browser"], dict_test["Download"],
-    dict_test["Upload"], dict_test["Ping"], dict_test["Jitter"]])
+c.execute("INSERT INTO internet_speed VALUES(?,?,?,?,?,?,?)",
+           [dict_test["id"], dict_test["Data"], dict_test["Browser"],
+            dict_test["Download"], dict_test["Upload"], dict_test["Ping"],
+             dict_test["Jitter"]])
 # Save the changes
 conn.commit()
 # to see the changes
-c.execute("SELECT * FROM internet_speed;")
+c.execute("SELECT * FROM internet_speed")
 print(c.fetchall())
 # Close the connection
 conn.close()
+
+# TODO: debugging:
+# nao reconhece a tabela já criada no sqlite3
+
+
+
 # TODO: Ligar ao Grafana para criar um dashboard com
 # limite sup, inf, e média. (Quality Control)
