@@ -53,37 +53,36 @@ def test_access_store(isp):
         print("Storing the data speed test...")
 
     else:
-        None  # it will have another isp here!
+        print("Only isp = 'nos'")  # it will have another isp here!
 
     print("Closing the browser...")
     return dict_finale
     browser.close()
 
 
-def wr_tmp_files(string):
+def wr_tmp_files(dict, dict_value):
     """Create a .txt file to attach to a mail"""
-
     print("Creating .txt tmp files...")
-    with open(str(string) + '.txt', 'w') as tmp_file:
+    with open(str(dict_test_value) + '.txt', 'w') as tmp_file:
         for key, value in dict_test.items():
             tmp_file.write("%s: %s\n" % (key, value))
         tmp_file.close()
     return tmp_file
 
 
-def send_mail(email_sender, min_download, min_upload):
+def send_mail(dict_dl, dict_ul, dict_data, dict_id, email_sender, min_download, min_upload):
     """Sending a mail with the information
-        if the data is below the metrics of Download/Upload"""
-
-    if float(dict_test['Download']) < min_download or float(dict_test['Upload']) < min_upload:
+    if the data is below the metrics of Download/Upload"""
+    global dict_test
+    if float(dict_dl) < min_download or float(dict_ul) < min_upload:
 
         print("Abrir o ficheiro .txt com os dados para enviar mail...")
-        txt_log = open(str(dict_test['id']) + '.txt')
+        txt_log = open(str(dict_id) + '.txt')
         data = txt_log.read()
         load_dotenv()
         email_addr = os.getenv('email_address')
         email_passwd = os.getenv('email_password')
-        email_subject = 'Teste de Velocidade a ' + str(dict_test['Data'])
+        email_subject = 'Teste de Velocidade a ' + str(dict_data)
         message = MIMEText(data)
         message['From'] = email_addr
         message['To'] = email_sender
