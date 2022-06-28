@@ -1,0 +1,10 @@
+#! /bin/sh
+
+# speed_test - sh script para associar o path de forma a correr
+# autonomamente no cron 
+
+# macbook air path
+PATH=/Users/islander:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Python/3.9/bin
+
+# Macbook air
+/usr/local/bin/python3 speed_test.py
