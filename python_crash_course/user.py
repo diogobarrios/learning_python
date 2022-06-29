@@ -7,6 +7,7 @@ class User:
         self.last_name = last_name
         self.mail = mail
         self.tel_number = tel_number
+        self.login_attempts = 0
 
     def describe_user(self):
         """User information"""
@@ -21,11 +22,28 @@ class User:
         """Greeting the user"""
         print(f"Greetings {self.first_name} {self.last_name}!")
 
+    def increment_login_attempts(self):
+        """Increment attempts of an unsuccessful login"""
+        self.login_attempts += 1
+        print(
+            f"Wrong username/password left: {3 - self.login_attempts} attempts")
+
+    def reset_login_attemps(self):
+        """Reset the login_attempts counter to intial value"""
+        self.login_attempts = 0
+        print("Let's reset the counter to have with 3 attempts again")
+        print(f"Counter: {self.login_attempts}")
+
 
 user_1 = User('Diogo', 'Barrios', 'diogo@mail.com', '910000000')
 user_1.describe_user()
 user_1.greet_user()
-print("\n")
-user_2 = User('Bernardo', 'Barrios', 'bernie@mail.com', '910000001')
-user_2.describe_user()
-user_2.greet_user()
+user_1.increment_login_attempts()
+user_1.increment_login_attempts()
+user_1.increment_login_attempts()
+user_1.reset_login_attemps()
+
+# print("\n")
+# user_2 = User('Bernardo', 'Barrios', 'bernie@mail.com', '910000001')
+# user_2.describe_user()
+# user_2.greet_user()
