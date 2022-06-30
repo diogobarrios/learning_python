@@ -34,14 +34,39 @@ class User:
         print("Let's reset the counter to have with 3 attempts again")
         print(f"Counter: {self.login_attempts}")
 
+class Privileges:
+    """Stores all information about privileges"""
+    
+    def __init__(self):
+        privileges = ['can delete a post','can ban user', 'can execute the root']
+        self.privileges = privileges
 
-user_1 = User('Diogo', 'Barrios', 'diogo@mail.com', '910000000')
-user_1.describe_user()
-user_1.greet_user()
-user_1.increment_login_attempts()
-user_1.increment_login_attempts()
-user_1.increment_login_attempts()
-user_1.reset_login_attemps()
+    def show_privileges(self):
+        """Describe what privileges the Admin has"""
+        print("These are some privileges of the Admin")
+        for p in self.privileges:
+            print(f"{p}")
+
+class Admin(User):
+    """Describing the attributes from the special User"""
+
+    def __init__(self, first_name, last_name, mail, tel_number):
+        """Initialize the attributes Admin"""
+        super().__init__(first_name, last_name, mail, tel_number)
+        self.privilege = Privileges()
+
+
+admin = Admin('Diogo', 'Barrios', 'diogo@mail.com', '910000000')
+admin.describe_user()
+admin.privilege.show_privileges()
+
+# user_1 = User('Diogo', 'Barrios', 'diogo@mail.com', '910000000')
+# user_1.describe_user()
+# user_1.greet_user()
+# user_1.increment_login_attempts()
+# user_1.increment_login_attempts()
+# user_1.increment_login_attempts()
+# user_1.reset_login_attemps()
 
 # print("\n")
 # user_2 = User('Bernardo', 'Barrios', 'bernie@mail.com', '910000001')

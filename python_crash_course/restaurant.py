@@ -26,13 +26,30 @@ class Restaurant:
         self.number_served += serving
 
 
-restaurant = Restaurant('Itali', 'italian')
+class IceCreamStand(Restaurant):
+    """This is a kind of Restaurant"""
+
+    def __init__(self, name, cuisine):
+        """Initialize the attributes for Ice Cream Stand"""
+        super().__init__(name, cuisine)
+        self.flavors = ['vanila', 'chocolate', 'menta', 'strawberry']
+
+    def describe_flavors(self):
+        """Describing the flavors daily"""
+        print("Today our flavors are:")
+        for flavor in self.flavors:
+            print(f"{flavor}")
+
+icecreamstand = IceCreamStand('Luigi', 'Dessert')
+icecreamstand.describe_restaurant()
+icecreamstand.describe_flavors()
+
+# restaurant = Restaurant('Itali', 'italian')
 # restaurant_mex = Restaurant('Caliente', 'mexican')
 # restaurant_yen = Restaurant('Yin&Yan', 'japanese')
-
-restaurant.describe_restaurant()
-restaurant.increment_number_served(10)
-restaurant.set_number_served()
+# restaurant.describe_restaurant()
+# restaurant.increment_number_served(10)
+# restaurant.set_number_served()
 # restaurant.open_restaurant()
 # print('\n')
 # restaurant_mex.describe_restaurant()
