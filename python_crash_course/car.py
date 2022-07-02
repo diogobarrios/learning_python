@@ -59,23 +59,3 @@ class ElectriCar(Car):
         """Initialize attributes of the parent class."""
         super().__init__(make, model, year)
         self.battery = Battery()
-
-
-# my_new_car = Car('Audi', 'a4', 2019)
-# print(my_new_car.get_descriptive_name())
-# my_new_car.update_odometer(23)
-# my_new_car.read_odemeter()
-
-# my_used_car = Car('subaru', 'outback', 2015)
-# print(my_used_car.get_descriptive_name())
-
-# my_used_car.update_odometer(23_500)  # This is the same as 23500, but is
-# my_used_car.read_odemeter()          # more readable
-
-
-# my_used_car.increment_odometer(100)
-# my_used_car.read_odemeter()
-my_tesla = ElectriCar('Tesla', 'model s', 2019)
-print(my_tesla.get_descriptive_name())
-my_tesla.battery.describe_battery()
-my_tesla.battery.get_range()
