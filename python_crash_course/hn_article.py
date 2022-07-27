@@ -1,4 +1,4 @@
-from pandas import read_parquet
+
 import requests
 import json
 
