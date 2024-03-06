@@ -33,7 +33,7 @@ def collatz() -> str:
             # break the first while statement
             print("Do you want to continue?(Y/n)")
             answer = str(input())    
-    
+            
             if answer.lower() == 'y':
                 print("Provide positive integer number.")
                 continue
